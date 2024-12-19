@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: white;
+}
+
+header {
+    background-color: #1e1e1e;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+
+    border-bottom: 3px solid rgba(255, 0, 0, 0.7);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+header .logo h1 {
+    margin: 0;
+    font-size: 32px;
+    background: linear-gradient(to right, #ff0000, #ff4d4d, #ff6f6f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    position: relative;
+    transition: text-shadow 0.7s ease, background 0.7s ease, -webkit-text-fill-color 0.7s ease, transform 0.5s;
+}
+
+
+header .logo h1:hover {
+    transform: scale(1.05);
+    border-color: red;
+    text-shadow: 0 0 25px rgba(255, 0, 0, 0.8), 0 0 45px rgba(255, 0, 0, 0.7), 0 0 60px rgba(255, 0, 0, 0.6);
+}
+
+header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+header nav ul li {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    transition: text-shadow 0.5s ease, background 0.5s ease, -webkit-text-fill-color 0.5s ease, color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: #ff0000;
+    text-shadow: 0 0 15px rgba(255, 0, 0, 0.8), 0 0 25px rgba(255, 0, 0, 0.7), 0 0 40px rgba(255, 0, 0, 0.6);
+}
