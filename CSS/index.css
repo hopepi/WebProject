@@ -140,6 +140,91 @@
     transform: scale(1.07);
 }
 
+#tracking-movies {
+    padding: 20px;
+    text-align: center;
+}
+
+.tracking-movies-list {
+    display: flex;
+    overflow-x: auto; /* Yatay kaydırma ekler */
+    padding: 10px 0;
+    gap: 20px; /* Kartlar arasındaki mesafeyi ayarladım */
+    scroll-snap-type: x mandatory; /* Kaydırma hizalama */
+    -webkit-overflow-scrolling: touch; /* Mobil cihazlar için kaydırmayı düzgünleştirir */
+}
+
+/* Kaydırma çubuğunu özelleştirme */
+.tracking-movies-list::-webkit-scrollbar {
+    width: 8px; /* Kaydırma çubuğunun genişliği */
+    height: 8px; /* Yatay kaydırma çubuğunun yüksekliği */
+}
+
+/* Kaydırma çubuğu arka planı */
+.tracking-movies-list::-webkit-scrollbar-track {
+    background-color: #333; /* Arka plan rengi */
+    border-radius: 10px; /* Köşeleri yuvarla */
+}
+
+.tracking-movies-list::-webkit-scrollbar-thumb {
+    background-color: #e60000; 
+    border-radius: 10px;
+    border: 2px solid #333;
+}
+
+.tracking-movies-list::-webkit-scrollbar-thumb:hover {
+    background-color: #ff0000;
+    transform: scale(1.2); /* Çubuğu büyütür */
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Geçiş efekti */
+}
+
+.tracking-movies-card {
+    min-width: 180px; /* Kartlar biraz daha küçük olacak */
+    max-width: 180px;
+    flex: 0 0 auto; /* Flex item'ların genişliği sabit olur */
+    scroll-snap-align: center; /* Kaydırma hizalama */
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 1s ease, background-image 1s ease;
+}
+
+.tracking-movies-card:hover {
+    transform: scale(1.05);
+    background-image: linear-gradient(45deg, rgba(255, 0, 0, 0.5), rgba(251, 19, 19, 0.5));
+    transition: background-image 1s ease, transform 1s ease;
+}
+
+.tracking-movies-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.tracking-movies-card h3 {
+    margin-top: 10px;
+    color: white;
+}
+
+
+.card-btn {
+    background-color: #ff0000; /* Kırmızı buton rengi */
+    color: white; /* Buton metni beyaz */
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px; /* H3 ile buton arasına mesafe ekler */
+    transition: background-color 0.3s ease;
+}
+
+.card-btn:hover {
+    background-color: #cc0000; /* Hover efekti */
+}
 
 
 #popular-movies {
@@ -151,7 +236,6 @@
     font-size: 27px;
     margin-bottom: 15px;
 }
-
 
 .movie-list {
     display: flex;
@@ -176,7 +260,6 @@
     transition: background-image 1s ease, transform 1s ease;
 }
 
-
 .movie-card img {
     width: 200px;
     height: auto;
@@ -188,10 +271,3 @@
     color: white;
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #1e1e1e;
-    color: white;
-}

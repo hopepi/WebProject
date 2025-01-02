@@ -1,3 +1,40 @@
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background-color: #ff0000;
+    border-radius: 10px; 
+    border: 3px solid rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #cc0000; 
+    transform: scale(1.1);
+}
+
+::-webkit-scrollbar-track {
+    background-color: #333;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar:horizontal {
+    height: 14px;
+}
+
+::-webkit-scrollbar-track:horizontal {
+    background-color: #333;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+    background-color: #ff0000;
+    border-radius: 10px;
+}
+
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -59,4 +96,10 @@ header nav ul li a {
 header nav ul li a:hover {
     color: #ff0000;
     text-shadow: 0 0 15px rgba(255, 0, 0, 0.8), 0 0 25px rgba(255, 0, 0, 0.7), 0 0 40px rgba(255, 0, 0, 0.6);
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: white;
 }

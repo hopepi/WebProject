@@ -1,0 +1,97 @@
+/* Arama Çubuğu */
+#search-container {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+}
+
+#search-input {
+    width: 90%;
+    max-width: 600px;
+    padding: 15px 20px;
+    font-size: 18px;
+    border: 2px solid #e60000;
+    border-radius: 25px;
+    background-color: #2a2a2a;
+    color: white;
+    outline: none;
+    transition: border-color 1s ease, box-shadow 0.7s ease;
+    text-align: center;
+}
+
+#search-input:focus {
+    border-color: #ff0000;
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(255, 0, 0, 0.6);
+    transition: border-color 1s ease, box-shadow 0.7s ease, transform 0.5s ease;
+}
+
+#search-input::placeholder {
+    color: #ccc;
+    font-weight: bold;
+}
+
+#search-input:focus::placeholder {
+    color: #e60000;
+    font-style: normal;
+    transition: color 1s ease;
+}
+
+.search-results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+.search-result-card {
+    background-color: #2a2a2a;
+    padding: 20px;
+    width: 180px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.4s ease, background-color 0.7s ease, box-shadow 0.8s ease;
+}
+
+.search-result-card:hover {
+    transform: scale(1.05);
+    background-color: #9a1e1e;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
+}
+
+.search-result-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.search-result-card h3 {
+    color: white;
+    margin-top: 10px;
+}
+
+.search-result-card p {
+    color: #ccc;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.watch-btn {
+    background-color: #333333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease, transform 0.7s ease;
+}
+
+.watch-btn:hover {
+    transform: scale(1.1);
+}
+
