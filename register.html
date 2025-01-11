@@ -13,21 +13,21 @@
     </div>
     <div class="login-container">
         <h2>Kayıt ol</h2>
-        <form action="#" method="POST">
+        <form action="PHP\register.php" method="POST">
             <div class="input-group">
                 <label for="username">Kullanıcı Adı</label>
                 <input type="text" id="username" name="username" required placeholder="Kullanıcı adınızı girin">
             </div>
             <div class="input-group">
-                <label for="username">E-Posta</label>
-                <input type="email" id="username" name="username" required placeholder="E-Posta adresinizi girin">
-            </div>  
+                <label for="email">E-Posta</label>
+                <input type="email" id="email" name="email" required placeholder="E-Posta adresinizi girin">
+            </div>
             <div class="input-group">
                 <label for="password">Şifre</label>
                 <input type="password" id="password" name="password" required placeholder="Şifrenizi belirleyin">
             </div>
             <div class="input-group">
-                <button type="button" onclick="location.href='index.html'">Kayıt ol</button>
+                <button type="submit">Kayıt ol</button>
             </div>
             <p>Hesabınız mı var? <a href="login.html">Giriş yap</a></p>
         </form>

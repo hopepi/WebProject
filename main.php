@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.html");
+    exit;
+}
+
+$username = $_SESSION['username'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,8 +27,8 @@
         <nav>
             <ul>
                 <li><a href="#">Ana Sayfa</a></li>
-                <li><a href="search.html">Arama</a></li>
-                <li><a href="login.html">Çıkış yap</a></li>
+                <li><a href="search.php">Arama</a></li>
+                <li><a href="PHP/logout.php">Çıkış yap</a></li>
             </ul>
         </nav>
     </header>
