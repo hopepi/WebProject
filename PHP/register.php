@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Kullanıcı adı veya e-posta zaten alınmış!";
     } else {
         // Kullanıcıyı ekle
-        $insert_query = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
+        $insert_query = "INSERT INTO users (username, email, password, role) VALUES ('$username', '$email', '$password', 'user')";
         if ($conn->query($insert_query)) {
             echo "Kayıt başarılı! Giriş yapabilirsiniz.";
             header("Location: ../login.html");
