@@ -24,7 +24,7 @@ $username = $_SESSION['username'];
         </div>
         <nav>
             <ul>
-                <li><a href="main.php">Ana Sayfa</a></li>
+                <li><a href="index.php">Ana Sayfa</a></li>
                 <li><a href="#">Arama</a></li>
                 <li><a href="PHP/logout.php">Çıkış yap</a></li>
             </ul>

@@ -26,7 +26,7 @@ if ($_SESSION['role'] !== 'admin') {
 <body>
     <div class="sidebar">
         <h2>Admin Dashboard</h2>
-        <a href="adminDashboard.php">Film Ekle</a>
+        <a href="#">Film Ekle</a>
         <a href="adminDashMovieList.php">Film Listesi</a>
         <a href="adminDashUserList.php">Kullanıcı Listesi</a>
         <a href="PHP\logout.php">Çıkış</a>

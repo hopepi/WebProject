@@ -7,6 +7,17 @@ if (!isset($_SESSION['username'])) {
 }
 
 $username = $_SESSION['username'];
+
+$conn = new mysqli("localhost", "root", "", "film_sitesi");
+
+// Bağlantı kontrolü
+if ($conn->connect_error) {
+    die("Veritabanı bağlantısı başarısız: " . $conn->connect_error);
+}
+
+// Filmleri almak için sorgu
+$sql = "SELECT movie_name, poster FROM film";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -119,47 +130,21 @@ $username = $_SESSION['username'];
     <section id="popular-movies">
         <h2>Popüler Yapımlar</h2>
         <div class="movie-list">
-            <div class="movie-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 1</h3>
-            </div>
-            <div class="movie-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 2</h3>
-            </div>
-            <div class="movie-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 3</h3>
-            </div>
-            <div class="movie-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 1</h3>
-            </div>
-            <div class="movie-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 2</h3>
-            </div>
-            <div class="movie-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 3</h3>
-            </div>
-            <div class="movie-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 1</h3>
-            </div>
-            <div class="movie-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 2</h3>
-            </div>
-            <div class="movie-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 3</h3>
-            </div>
-            <div class="movie-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 3</h3>
-            </div>
-        </div>
+        <?php if ($result->num_rows > 0): ?>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <div class="movie-card">
+                    <img src="<?php echo htmlspecialchars($row['poster']); ?>" alt="Film Afişi">
+                    <h3><?php echo htmlspecialchars($row['movie_name']); ?></h3>
+                    <form action="PHP/addToWatchList.php" method="POST">
+                        <input type="hidden" name="movie_id" value="<?php echo htmlspecialchars($row['movie_id'] ?? ''); ?>">
+                        <button type="submit" class="card-btn">İzleme Listesine Ekle</button>
+                    </form>
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p>Henüz bir yapım bulunmamaktadır.</p>
+        <?php endif; ?>
+    </div>
     </section>
 
     <!-- Footer -->
