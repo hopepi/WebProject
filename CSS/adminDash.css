@@ -133,7 +133,6 @@ form input, form textarea {
 }
 
 form button {
-    padding: 10px 20px;
     background-color: #ff0000;
     color: #ffffff;
     border: none;

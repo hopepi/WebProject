@@ -2,14 +2,14 @@
 session_start();
 
 if (!isset($_SESSION['username'])) {
-    header("Location: adminLogin.html");
+    header("Location: adminLogin.php");
     exit;
 }
 
 $username = $_SESSION['username'];
 
 if ($_SESSION['role'] !== 'admin') {
-    header("Location: login.html");
+    header("Location: login.php");
     exit;
 }
 $conn = new mysqli("localhost", "root", "", "film_sitesi");
@@ -38,8 +38,7 @@ $result = $conn->query($sql);
         <h2>Admin Dashboard</h2>
         <a href="adminDashboard.php">Film Ekle</a>
         <a href="adminDashMovieList.php">Film Listesi</a>
-        <a href="#">Kullanıcı Listesi</a>
-        <a href="#">Roller</a>
+        <a href="adminDashUserList.php">Kullanıcı Listesi</a>
         <a href="PHP\logout.php">Çıkış</a>
     </div>
 
@@ -53,7 +52,8 @@ $result = $conn->query($sql);
                         <th>Açıklama</th>
                         <th>Film Yolu</th>
                         <th>Poster Yolu</th>
-                        <th>İşlemler</th>
+                        <th>Güncelleme</th>
+                        <th>Silme</th>
                     </tr>
                 </thead>
                 <tbody>

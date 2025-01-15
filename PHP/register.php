@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $insert_query = "INSERT INTO users (username, email, password, role) VALUES ('$username', '$email', '$password', 'user')";
         if ($conn->query($insert_query)) {
             echo "Kayıt başarılı! Giriş yapabilirsiniz.";
-            header("Location: ../login.html");
+            header("Location: ../login.php");
             exit;
         } else {
             echo "Hata: " . $conn->error;

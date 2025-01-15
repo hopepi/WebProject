@@ -3,7 +3,7 @@ session_start();
 
 // Eğer admin giriş yapmamışsa giriş sayfasına yönlendir
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header("Location: adminLogin.html");
+    header("Location: adminLogin.php");
     exit;
 }
 

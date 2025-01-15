@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION['username'])) {
-    header("Location: ../main.php"); // Giriş yapmışsa ana sayfaya yönlendirilir
+    header("Location: ../index.php"); // Giriş yapmışsa ana sayfaya yönlendirilir
     exit;
 }
 
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $result->fetch_assoc();
         if ($password === $user['password']) {
             $_SESSION['username'] = $username;
-            header("Location: ../main.php");
+            header("Location: ../index.php");
             exit;
         } else {
             echo "Hatalı şifre!";
