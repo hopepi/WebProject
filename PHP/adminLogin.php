@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Şifre ve rol kontrolü
         if ($password === $user['password'] && $user['role'] === 'admin') {
             $_SESSION['username'] = $username;
+            $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['role'] = $user['role'];
             header("Location: ../adminDashboard.php");
             exit;

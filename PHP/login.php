@@ -26,6 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $result->fetch_assoc();
         if ($password === $user['password']) {
             $_SESSION['username'] = $username;
+            $_SESSION['user_id'] = $user["user_id"];
+            $_SESSION['role'] = $user["role"];
             header("Location: ../index.php");
             exit;
         } else {

@@ -7,6 +7,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 $username = $_SESSION['username'];
+$user_id = $_SESSION['user_id'];
 
 $conn = new mysqli("localhost", "root", "", "film_sitesi");
 
@@ -16,7 +17,7 @@ if ($conn->connect_error) {
 }
 
 // Filmleri almak için sorgu
-$sql = "SELECT movie_name, poster FROM film";
+$sql = "SELECT movie_id, movie_name, poster FROM film";
 $result = $conn->query($sql);
 ?>
 
@@ -132,19 +133,31 @@ $result = $conn->query($sql);
         <div class="movie-list">
         <?php if ($result->num_rows > 0): ?>
             <?php while ($row = $result->fetch_assoc()): ?>
+                <?php
+                $movie_id = $row['movie_id'];
+                // İzleme listesinde olup olmadığını kontrol et
+                $check_sql = "SELECT * FROM tracking WHERE user_id = ? AND movie_id = ?";
+                $stmt = $conn->prepare($check_sql);
+                $stmt->bind_param("ii", $user_id, $movie_id);
+                $stmt->execute();
+                $check_result = $stmt->get_result();
+                $is_in_watchlist = $check_result->num_rows > 0;
+                ?>
                 <div class="movie-card">
                     <img src="<?php echo htmlspecialchars($row['poster']); ?>" alt="Film Afişi">
                     <h3><?php echo htmlspecialchars($row['movie_name']); ?></h3>
-                    <form action="PHP/addToWatchList.php" method="POST">
-                        <input type="hidden" name="movie_id" value="<?php echo htmlspecialchars($row['movie_id'] ?? ''); ?>">
-                        <button type="submit" class="card-btn">İzleme Listesine Ekle</button>
+                    <form action="PHP/updateWatchList.php" method="POST">
+                        <input type="hidden" name="movie_id" value="<?php echo $row['movie_id']; ?>">
+                        <button type="submit" name="action" value="<?php echo $is_in_watchlist ? 'remove' : 'add'; ?>" class="card-btn">
+                            <?php echo $is_in_watchlist ? 'Listeden Çıkar' : 'İzleme Listesine Ekle'; ?>
+                        </button>
                     </form>
                 </div>
             <?php endwhile; ?>
         <?php else: ?>
             <p>Henüz bir yapım bulunmamaktadır.</p>
         <?php endif; ?>
-    </div>
+        </div>
     </section>
 
     <!-- Footer -->
@@ -152,5 +165,6 @@ $result = $conn->query($sql);
         <p>&copy; 2024 Umut Hub. Tüm Hakları Saklıdır.</p>
     </footer>
     <script src="JavaScript/video.js"></script>
+    <script src="JavaScript/ajax.js"></script>
 </body>
 </html>
