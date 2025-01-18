@@ -16,7 +16,7 @@ if ($conn->connect_error) {
     die("Veritabanı bağlantısı başarısız: " . $conn->connect_error);
 }
 
-// Filmleri almak için sorgu
+
 $sql = "SELECT movie_id, movie_name, poster FROM film";
 $result = $conn->query($sql);
 ?>
@@ -74,60 +74,43 @@ $result = $conn->query($sql);
     <section id="tracking-movies">
         <h2>Takip Edilen Yapımlar</h2>
         <div class="tracking-movies-list">
-            <div class="tracking-movies-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 1</h3>
-                <button class="card-btn">İzle</button>
-            </div>
-            <div class="tracking-movies-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 2</h3>
-                <button class="card-btn">İzle</button>
-            </div>
-            <div class="tracking-movies-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 3</h3>
-                <button class="card-btn">İzle</button>
-            </div>
-            <div class="tracking-movies-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 1</h3>
-                <button class="card-btn">İzle</button>
-            </div>
-            <div class="tracking-movies-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 2</h3>
-                <button class="card-btn">İzle</button>
-            </div>
-            <div class="tracking-movies-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 3</h3>
-                <button class="card-btn">İzle</button>
-            </div>
-            <div class="tracking-movies-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 1</h3>
-                <button class="card-btn">İzle</button>
-            </div>
-            <div class="tracking-movies-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 2</h3>
-                <button class="card-btn">İzle</button>
-            </div>
-            <div class="tracking-movies-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 3</h3>
-                <button class="card-btn">İzle</button>
-            </div>
-            <div class="tracking-movies-card">
-                <img src="https://via.placeholder.com/200x300" alt="Film Afişi">
-                <h3>Film Adı 3</h3>
-                <button class="card-btn">İzle</button>
-            </div>
+            <?php
+            $tracking_sql = "
+                SELECT film.movie_id, film.movie_name, film.poster 
+                FROM tracking
+                INNER JOIN film ON tracking.movie_id = film.movie_id
+                WHERE tracking.user_id = ?
+            ";
+            $stmt = $conn->prepare($tracking_sql);
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+            $tracking_result = $stmt->get_result();
+
+            if ($tracking_result->num_rows > 0):
+                while ($row = $tracking_result->fetch_assoc()):
+            ?>
+                <div class="tracking-movies-card">
+                    <img src="<?php echo htmlspecialchars($row['poster']); ?>" alt="Film Afişi">
+                    <h3><?php echo htmlspecialchars($row['movie_name']); ?></h3>
+                    <form action="PHP/updateWatchList.php" method="POST" style="display: inline-block;">
+                        <input type="hidden" name="movie_id" value="<?php echo $row['movie_id']; ?>">
+                        <button type="submit" name="action" value="remove" class="card-btn">Listeden Çıkar</button>
+                    </form>
+                    <form action="watch.php" method="GET" style="display: inline-block;">
+                        <input type="hidden" name="movie_id" value="<?php echo $row['movie_id']; ?>">
+                        <button type="submit" class="card-btn">İzle</button>
+                    </form>
+                </div>
+            <?php
+                endwhile;
+            else:
+            ?>
+                <p>Henüz izleme listenizde bir yapım bulunmamaktadır.</p>
+            <?php endif; ?>
         </div>
     </section>
-    
 
+    
     <section id="popular-movies">
         <h2>Popüler Yapımlar</h2>
         <div class="movie-list">
@@ -146,11 +129,15 @@ $result = $conn->query($sql);
                 <div class="movie-card">
                     <img src="<?php echo htmlspecialchars($row['poster']); ?>" alt="Film Afişi">
                     <h3><?php echo htmlspecialchars($row['movie_name']); ?></h3>
-                    <form action="PHP/updateWatchList.php" method="POST">
+                    <form action="PHP/updateWatchList.php" method="POST" style="display: block;">
                         <input type="hidden" name="movie_id" value="<?php echo $row['movie_id']; ?>">
                         <button type="submit" name="action" value="<?php echo $is_in_watchlist ? 'remove' : 'add'; ?>" class="card-btn">
                             <?php echo $is_in_watchlist ? 'Listeden Çıkar' : 'İzleme Listesine Ekle'; ?>
                         </button>
+                    </form>
+                    <form action="" method="GET" style="display: block; margin-top: 10px;">
+                        <input type="hidden" name="movie_id" value="<?php echo $row['movie_id']; ?>">
+                        <button type="submit" class="card-btn">İzle</button>
                     </form>
                 </div>
             <?php endwhile; ?>
@@ -160,7 +147,6 @@ $result = $conn->query($sql);
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2024 Umut Hub. Tüm Hakları Saklıdır.</p>
     </footer>

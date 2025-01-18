@@ -15,15 +15,15 @@
     background-color: #2a2a2a;
     color: white;
     outline: none;
-    transition: border-color 1s ease, box-shadow 0.7s ease;
+    transition: border-color 0.5s ease, box-shadow 0.3s ease;
     text-align: center;
 }
 
 #search-input:focus {
     border-color: #ff0000;
     transform: scale(1.05);
-    box-shadow: 0 0 40px rgba(255, 0, 0, 0.6);
-    transition: border-color 1s ease, box-shadow 0.7s ease, transform 0.5s ease;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+    transition: border-color 0.5s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 #search-input::placeholder {
@@ -34,9 +34,39 @@
 #search-input:focus::placeholder {
     color: #e60000;
     font-style: normal;
-    transition: color 1s ease;
+    transition: color 0.5s ease;
 }
 
+/* Arama Butonu */
+.search-btn {
+    padding: 12px 25px;
+    font-size: 16px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-left: 10px;
+    display: inline-block;
+    text-align: center;
+}
+
+.search-btn:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+}
+
+.search-btn:active {
+    transform: scale(1);
+}
+
+.search-btn:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+}
+
+/* Arama Sonuçları */
 .search-results {
     display: flex;
     flex-wrap: wrap;
@@ -79,6 +109,7 @@
     margin-top: 10px;
 }
 
+/* İzleme Butonu */
 .watch-btn {
     background-color: #333333;
     color: white;
@@ -88,10 +119,10 @@
     font-size: 16px;
     cursor: pointer;
     margin-top: 15px;
-    transition: background-color 0.3s ease, transform 0.7s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .watch-btn:hover {
-    transform: scale(1.1);
+    background-color: #555555;
+    transform: scale(1.05);
 }
-

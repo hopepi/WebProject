@@ -1,10 +1,13 @@
 document.querySelectorAll('.card-btn').forEach(button => {
     button.addEventListener('click', function(event) {
-        event.preventDefault(); // Sayfanın yenilenmesini engelle
+        event.preventDefault();
 
         let form = this.closest('form');
         let movieId = form.querySelector('input[name="movie_id"]').value;
         let action = this.value; // 'add' veya 'remove'
+
+        // Butonun disable edilmesi, aynı anda birden fazla işlem yapılmasını engeller
+        this.disabled = true;
 
         fetch('PHP/updateWatchList.php', {
             method: 'POST',
@@ -25,12 +28,16 @@ document.querySelectorAll('.card-btn').forEach(button => {
                     this.textContent = 'İzleme Listesine Ekle';
                 }
             } else {
-                alert('İşlem başarısız oldu: ' + data.message);
+                alert('İşlem başarısız oldu: ' + (data.message || 'Bilinmeyen hata'));
             }
+
+            // Butonun tekrar aktif hale getirilmesi
+            this.disabled = false;
         })
         .catch(error => {
             console.error('Hata:', error);
             alert('Bir hata oluştu.');
+            this.disabled = false;
         });
     });
 });
