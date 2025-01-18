@@ -29,16 +29,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($action === 'add') {
         $sql = "INSERT INTO tracking (user_id, movie_id) VALUES (?, ?)";
+        $updatePopularity = "UPDATE film SET popularity = popularity + 1 WHERE movie_id = ?";
     } else if ($action === 'remove') {
         $sql = "DELETE FROM tracking WHERE user_id = ? AND movie_id = ?";
+        $updatePopularity = "UPDATE film SET popularity = popularity - 1 WHERE movie_id = ?";
     }
 
+    // Tracking tablosuna ekleme veya silme işlemi
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $user_id, $movie_id);
+    
     if ($stmt->execute()) {
-        echo json_encode(['success' => true]);
+        // Popülerlik güncellemesi
+        $popularityStmt = $conn->prepare($updatePopularity);
+        $popularityStmt->bind_param("i", $movie_id);
+        
+        // Popülerlik güncelleme işlemine ait kontrol ekleyelim
+        if ($popularityStmt->execute()) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Popülerlik güncellemesi başarısız: ' . $conn->error]);
+        }
     } else {
-        echo json_encode(['success' => false, 'message' => 'Veritabanı işlemi başarısız.']);
+        echo json_encode(['success' => false, 'message' => 'Veritabanı işlemi başarısız: ' . $conn->error]);
     }
 }
 

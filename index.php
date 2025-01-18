@@ -19,6 +19,9 @@ if ($conn->connect_error) {
 
 $sql = "SELECT movie_id, movie_name, poster FROM film";
 $result = $conn->query($sql);
+
+$sqlPopularty = "SELECT * FROM film ORDER BY popularity DESC LIMIT 20";
+$resultPopularty = $conn->query($sqlPopularty);
 ?>
 
 <!DOCTYPE html>
@@ -114,8 +117,8 @@ $result = $conn->query($sql);
     <section id="popular-movies">
         <h2>Popüler Yapımlar</h2>
         <div class="movie-list">
-        <?php if ($result->num_rows > 0): ?>
-            <?php while ($row = $result->fetch_assoc()): ?>
+        <?php if ($resultPopularty->num_rows > 0): ?>
+            <?php while ($row = $resultPopularty->fetch_assoc()): ?>
                 <?php
                 $movie_id = $row['movie_id'];
                 // İzleme listesinde olup olmadığını kontrol et

@@ -79,7 +79,6 @@
 .search-result-card {
     background-color: #2a2a2a;
     padding: 20px;
-    width: 180px;
     text-align: center;
     border-radius: 10px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
@@ -93,8 +92,9 @@
 }
 
 .search-result-card img {
-    width: 100%;
-    height: auto;
+    width: 200px;
+    height: 260px;
+    object-fit: cover;
     border-radius: 10px;
 }
 

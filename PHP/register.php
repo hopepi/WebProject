@@ -1,8 +1,7 @@
 <?php
-// Veritabanı bağlantısı
+
 $conn = new mysqli("localhost", "root", "", "film_sitesi");
 
-// Bağlantı kontrolü
 if ($conn->connect_error) {
     die("Bağlantı hatası: " . $conn->connect_error);
 }
@@ -19,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($check_result->num_rows > 0) {
         echo "Kullanıcı adı veya e-posta zaten alınmış!";
     } else {
-        // Kullanıcıyı ekle
         $insert_query = "INSERT INTO users (username, email, password, role) VALUES ('$username', '$email', '$password', 'user')";
         if ($conn->query($insert_query)) {
             echo "Kayıt başarılı! Giriş yapabilirsiniz.";
