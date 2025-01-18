@@ -54,6 +54,7 @@ $result = $conn->query($sql);
                         <th>Poster Yolu</th>
                         <th>Güncelleme</th>
                         <th>Silme</th>
+                        <th>Günün Filmi Yap</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,6 +83,12 @@ $result = $conn->query($sql);
                                 <td>
                                     <input type="hidden" name="movie_id" value="<?php echo $row['movie_id']; ?>">
                                     <button type="submit" class="btn">Sil</button>
+                                </td>
+                            </form>
+                            <form action="PHP/updateDailyMovie.php" method="POST">
+                                <td>
+                                    <input type="hidden" name="movie_id" value="<?php echo $row['movie_id']; ?>">
+                                    <button type="submit" class="btn">Günün Filmi Yap</button>
                                 </td>
                             </form>
                             </tr>

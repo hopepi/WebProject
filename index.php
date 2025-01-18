@@ -22,6 +22,14 @@ $result = $conn->query($sql);
 
 $sqlPopularty = "SELECT * FROM film ORDER BY popularity DESC LIMIT 20";
 $resultPopularty = $conn->query($sqlPopularty);
+
+$sqlDaily = "
+    SELECT f.movie_name, f.comment, f.poster, f.movie_dir 
+    FROM daily_movie dm 
+    JOIN film f ON dm.movie_id = f.movie_id 
+    LIMIT 1";
+$resultDaily = $conn->query($sqlDaily);
+$daily_movie = $resultDaily->num_rows > 0 ? $resultDaily->fetch_assoc() : null;
 ?>
 
 <!DOCTYPE html>
@@ -49,29 +57,29 @@ $resultPopularty = $conn->query($sqlPopularty);
     </header>
 
     <section id="hero">
-        <div class="card">
-            <div class="front">
-                <span class="badge">Günün Önerisi</span>
-                <h2>Interstellar (2014)</h2>
-                <img src="resim.jpg" alt="Film Afişi">
-                <p>Bilim kurgu dünyasına heyecan verici bir yolculuk.</p>
-            </div>
-            <div class="back">
-                <video muted loop>
-                    <source src="video.mp4" type="video/mp4">
-                </video>
-                <div class="back-content">
-                    <h2>Interstellar</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga placeat quam ipsa eius aliquam nesciunt voluptas veniam et esse,
-                        enim alias, libero accusantium, repudiandae officiis delectus quod quaerat ad beatae impedit eum sint quas quo. Eveniet, 
-                        saepe quia iusto ipsa exercitationem dignissimos impedit similique nulla harum error. Non, optio aut.
-                    </p>
-                    <button>Fragmanı İzle</button>
-                    <button>İzle</button>
+        <?php if ($daily_movie): ?>
+            <div class="card">
+                <div class="front">
+                    <span class="badge">Günün Önerisi</span>
+                    <h2><?php echo htmlspecialchars($daily_movie['movie_name']); ?></h2>
+                    <img src="<?php echo htmlspecialchars($daily_movie['poster']); ?>" alt="Film Afişi">
+                    <p><?php echo htmlspecialchars($daily_movie['comment']); ?></p>
+                </div>
+                <div class="back">
+                    <video muted loop>
+                        <source src="<?php echo htmlspecialchars($daily_movie['movie_dir']); ?>" type="video/mp4">
+                    </video>
+                    <div class="back-content">
+                        <h2><?php echo htmlspecialchars($daily_movie['movie_name']); ?></h2>
+                        <p><?php echo htmlspecialchars($daily_movie['comment']); ?></p>
+                        <button>Fragmanı İzle</button>
+                        <button>İzle</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php else: ?>
+            <p>Şu anda günün filmi seçilmemiş.</p>
+        <?php endif; ?>
     </section>
 
     <section id="tracking-movies">

@@ -38,7 +38,7 @@
     align-items: center;
     color: white;
     border-radius: 15px;
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
     text-align: center;
     transition: transform 0.7s ease-in-out;
@@ -53,22 +53,28 @@
 }
 
 .front h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
+    font-size: 21px;
+    margin-bottom: 5px;
     font-weight: bold;
 }
 
 .front img {
     width: 100%;
     max-width: 250px;
-    height: auto;
+    height: 400px;
+    object-fit: cover;
     border-radius: 10px;
     margin-top: 15px;
 }
 
 .front p {
-    font-size: 16px;
-    margin-bottom: 15px;
+    font-size: 12px;
+    margin-bottom: 5px;
+    overflow: hidden; /* Fazla yazı görünmez */
+    text-overflow: ellipsis; /* Fazla yazı varsa '...' ekler */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Üç satırla sınırlı olacak */
+    -webkit-box-orient: vertical;
 }
 
 .back {
